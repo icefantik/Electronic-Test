@@ -1,21 +1,30 @@
 package com.example.electronictest;
 
-import com.resources.*;
+import com.parse.xmlfile.ParseXmlFile;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.LinearLayout;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParser;
+
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        XmlPullParser parser = getResources().getXml(R.xml.test);
+
+        ParseXmlFile parseXmlFile = new ParseXmlFile();
+        parseXmlFile.parsXmlFile(parser);
 
         createRadioButtons();
 
