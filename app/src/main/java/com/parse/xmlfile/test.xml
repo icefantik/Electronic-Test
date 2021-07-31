@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Test>
+    <TestSet>
+        <question>Вопрос номер один</question>
+        <question>Вопрос номер два</question>
+        <question>Вопрос номер три</question>
+        <answer>Вопрос номер три</answer>
+    </TestSet>
+    <TestSet>
+        <question>Вопрос номер один</question>
+        <question>Вопрос номер два</question>
+        <question>Вопрос номер три</question>
+        <answer>Вопрос номер три</answer>
+    </TestSet>
+    <TestSet>
+        <question>Вопрос номер один</question>
+        <question>Вопрос номер два</question>
+        <question>Вопрос номер три</question>
+        <answer>Вопрос номер три</answer>
+    </TestSet>
+    <TestSet>
+        <question>Вопрос номер один</question>
+        <question>Вопрос номер два</question>
+        <question>Вопрос номер три</question>
+        <answer>Вопрос номер три</answer>
+    </TestSet>
+</Test>

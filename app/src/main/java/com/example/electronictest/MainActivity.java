@@ -1,9 +1,7 @@
 package com.example.electronictest;
-//package com.resources.questions;
 
 import com.resources.*;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.*;
