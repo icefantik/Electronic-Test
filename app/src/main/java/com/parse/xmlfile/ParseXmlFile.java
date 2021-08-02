@@ -1,44 +1,39 @@
 package com.parse.xmlfile;
 
 import com.example.electronictest.R;
-
-import java.io.File;
-import java.io.IOException;
-import javax.xml.parsers.*;
-import java.util.ArrayList;
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 import org.xmlpull.v1.XmlPullParser;
 import com.parse.xmlfile.ParseXmlFile;
+import java.util.ArrayList;
 
 public class ParseXmlFile {
-    public void parsXmlFile(XmlPullParser parser)
+    ArrayList<String> list = new ArrayList<String>();
+    int NumAnser;
+    public void parsXmlFile(XmlPullParser parser) throws org.xmlpull.v1.XmlPullParserException
     {
         try {
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = documentBuilder.parse("");
-
-            Node root = document.getDocumentElement();
-            NodeList testSets = root.getChildNodes();
-            for (int i = 0; i < testSets.getLength(); ++i) {
-                Node testSet = testSets.item(i);
-                if (testSet.getNodeType() != Node.TEXT_NODE) {
-                    NodeList testSetProps = testSet.getChildNodes();
-                    for (int j = 0; j < testSetProps.getLength(); ++j) {
-                        Node testProd = testSetProps.item(j);
-                        if (testProd.getNodeType() != Node.TEXT_NODE) {
-                            //System.out.println("1: " + testProd.getNodeType());
-                        }
+            while (parser.getEventType() != XmlPullParser.END_DOCUMENT)
+            {
+                if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("TestSet")){
+                    list.add(parser.getAttributeValue(0));
+                    list.add(parser.getAttributeValue(1));
+                    list.add(parser.getAttributeValue(2));
+                    list.add(parser.getAttributeValue(3));
+                    parser.next();
+                    if (parser.getName().equals("numAnswer"))
+                    {
+                        //parser.get;
                     }
                 }
+                parser.next();
             }
         }
-        catch(ParserConfigurationException ex) {
-            ex.printStackTrace(System.out);
-        } catch (SAXException ex) {
-            ex.printStackTrace(System.out);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
+        catch (Throwable t)
+        {
+            //Toast.makeText(this, "" + t.toString(), Toast.LENGTH_LONG).show();
         }
     }
 }

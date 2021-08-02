@@ -1,27 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Test>
+<test>
     <TestSet>
-        <question>Вопрос номер один</question>
-        <question>Вопрос номер два</question>
-        <question>Вопрос номер три</question>
-        <answer>Вопрос номер три</answer>
-    </TestSet>
-    <TestSet>
-        <question>Вопрос номер один</question>
-        <question>Вопрос номер два</question>
-        <question>Вопрос номер три</question>
-        <answer>Вопрос номер три</answer>
-    </TestSet>
-    <TestSet>
-        <question>Вопрос номер один</question>
-        <question>Вопрос номер два</question>
-        <question>Вопрос номер три</question>
-        <answer>Вопрос номер три</answer>
-    </TestSet>
-    <TestSet>
-        <question>Вопрос номер один</question>
-        <question>Вопрос номер два</question>
-        <question>Вопрос номер три</question>
-        <answer>Вопрос номер три</answer>
-    </TestSet>
-</Test>
+        <question1>One</question1>
+        <question2>Two</question2>>
+        <question3>Three</question3>>
+        <answer>answ</answer>>
+        <numAnswer>1</numAnswer>> <!-- number question -->
+        <kindButton>1</kindButton>
+    </TestSet>>
+</test>
