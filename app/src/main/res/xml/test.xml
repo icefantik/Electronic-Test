@@ -1,9 +1,10 @@
 <test>
     <TestSet>
-        <question1>One</question1>
-        <question2>Two</question2>>
-        <question3>Three</question3>>
-        <answer>answ</answer>>
+        <question1 type="text">One</question1>
+        <question2 type="text">Two</question2>>
+        <question3 type="text">Three</question3>>
+        <coundQuestions>3</coundQuestions>
+        <!-- <answer>answ</answer>> -->
         <numAnswer>1</numAnswer>> <!-- number question -->
         <kindButton>1</kindButton>
     </TestSet>>

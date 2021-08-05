@@ -10,6 +10,8 @@ import android.widget.*;
 import android.widget.LinearLayout;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         ParseXmlFile parseXmlFile = new ParseXmlFile();
         try {
-            parseXmlFile.parsXmlFile(parser);
-        } catch (Throwable t){
+            ArrayList<ParseXmlFile.TestItems> e = parseXmlFile.parsXmlFile(parser);
+        } catch (Throwable t)
+        {
             Toast.makeText(this, "" + t.toString(), Toast.LENGTH_LONG).show();
         }
 
@@ -47,23 +50,25 @@ public class MainActivity extends AppCompatActivity {
     {
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        RadioGroup radioGroup = new RadioGroup(this);
-        RadioButton radioButton1 = new RadioButton(this);
-        radioButton1.setText("Ответ 1.");
-        RadioButton radioButton2 = new RadioButton(this);
-        radioButton2.setText("Ответ 2.");
-        RadioButton radioButton3 = new RadioButton(this);
-        radioButton3.setText("Ответ 3.");
         params.setMargins(0, 0, 30, 100);
 
+        RadioGroup radioGroup = new RadioGroup(this);
+
+        RadioButton radioButton1 = new RadioButton(this);
+        radioButton1.setText("Ответ 1.");
         radioButton1.setLayoutParams(params);
+        RadioButton radioButton2 = new RadioButton(this);
+        radioButton2.setText("Ответ 2.");
         radioButton2.setLayoutParams(params);
+        RadioButton radioButton3 = new RadioButton(this);
+        radioButton3.setText("Ответ 3.");
         radioButton3.setLayoutParams(params);
 
-        linearLayout.addView(radioButton1);
-        linearLayout.addView(radioButton2);
-        linearLayout.addView(radioButton3);
+        radioGroup.addView(radioButton1);
+        radioGroup.addView(radioButton2);
+        radioGroup.addView(radioButton3);
+
+        linearLayout.addView(radioGroup);
     }
     private void createCheckBoxs()
     {
