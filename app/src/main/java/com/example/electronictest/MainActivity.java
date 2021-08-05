@@ -16,13 +16,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class MainActivity extends AppCompatActivity {
-    enum KindCreateButton{
-        RADIO_BUTTON,
-        CHECKBOX
-    }
+public class MainActivity extends AppCompatActivity
+{
+    private static ArrayList<ParseXmlFile.TestItems> e;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
         XmlPullParser parser = getResources().getXml(R.xml.test);
 
         ParseXmlFile parseXmlFile = new ParseXmlFile();
+
         try {
-            ArrayList<ParseXmlFile.TestItems> e = parseXmlFile.parsXmlFile(parser);
-        } catch (Throwable t)
-        {
-            Toast.makeText(this, "" + t.toString(), Toast.LENGTH_LONG).show();
+            e = parseXmlFile.parsXmlFile(parser);
+        } catch (IOException | XmlPullParserException error) {
+            Toast.makeText(this, "" + error.toString(), Toast.LENGTH_LONG).show();
+            error.printStackTrace();
         }
 
         createRadioButtons();
@@ -90,5 +89,9 @@ public class MainActivity extends AppCompatActivity {
         linearLayout.addView(checkBox1);
         linearLayout.addView(checkBox2);
         linearLayout.addView(checkBox3);
+    }
+    enum KindCreateButton{
+        RADIO_BUTTON,
+        CHECKBOX
     }
 }
