@@ -5,7 +5,16 @@
         <question3 type="text">Three</question3>>
         <coundQuestions>3</coundQuestions>
         <!-- <answer>answ</answer>> -->
-        <numAnswer>1</numAnswer>> <!-- number question -->
+        <numAnswer>1</numAnswer> <!-- number question -->
         <kindButton>1</kindButton>
-    </TestSet>>
+    </TestSet>
+    <TestSet>
+        <question1>retret</question1>
+        <question2>gfhgfh</question2>>
+        <question3>gfhqqqqqqq</question3>>
+        <coundQuestions>1</coundQuestions>
+        <!-- <answer>answ</answer>> -->
+        <numAnswer>2</numAnswer> <!-- number question -->
+        <kindButton>2</kindButton>
+    </TestSet>
 </test>
