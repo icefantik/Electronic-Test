@@ -17,7 +17,6 @@ public class ParseXmlFile
 {
     public ArrayList <TestItems> parsXmlFile(XmlPullParser parser) throws IOException, XmlPullParserException
     {
-        //XmlPullParser.END_TAG
         ArrayList<String> questions = new ArrayList<String>();
         TestItems testItemsElems = new TestItems();
         ArrayList <TestItems> listTestItem = new ArrayList<TestItems>();

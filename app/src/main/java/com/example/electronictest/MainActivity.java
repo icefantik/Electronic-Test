@@ -2,6 +2,8 @@ package com.example.electronictest;
 
 import com.parse.xmlfile.ParseXmlFile;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.view.View;
@@ -18,7 +20,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity
 {
-    private static ArrayList<ParseXmlFile.TestItems> e;
+    private static ArrayList<ParseXmlFile.TestItems> setTests;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -26,16 +28,24 @@ public class MainActivity extends AppCompatActivity
 
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 100, 30, 0);
         XmlPullParser parser = getResources().getXml(R.xml.test);
 
         ParseXmlFile parseXmlFile = new ParseXmlFile();
 
         try {
-            e = parseXmlFile.parsXmlFile(parser);
+            setTests = parseXmlFile.parsXmlFile(parser);
         } catch (IOException | XmlPullParserException error) {
             Toast.makeText(this, "" + error.toString(), Toast.LENGTH_LONG).show();
             error.printStackTrace();
         }
+
+        //если при чтении из xml файла указано налитиче картинти
+        //ImageView imageView = new ImageView(this);
+        //imageView.setImageDrawable(Drawable.createFromPath("C:\\Users\\Peter\\Desktop\\E8P7e4cVgAE8SvZ.jpg"));
+        //imageView.setImageResource(R.drawable.e);
+        //imageView.setLayoutParams(params);
+        //linearLayout.addView(imageView);
 
         createRadioButtons();
         //createCheckBoxs();
