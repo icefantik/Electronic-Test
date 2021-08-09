@@ -67,6 +67,14 @@ public class ParseXmlFile
                 }
                 parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
             }
+            else if (parser.getName().equals("image")) {
+                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
+                if (parser.next() == XmlPullParser.TEXT) {
+                    testItemsElems.images = parser.getText();
+                    parser.nextTag();
+                }
+                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+            }
             else if (parser.getEventType() != XmlPullParser.START_TAG && parser.next() != XmlPullParser.END_DOCUMENT) {
                 testItemsElems.answers = answers;
                 listTestItem.add(testItemsElems);
@@ -85,5 +93,6 @@ public class ParseXmlFile
         public int NumAnswer;
         public int CountQuestions;
         public int KindAnswer;
+        public String images;
     }
 }

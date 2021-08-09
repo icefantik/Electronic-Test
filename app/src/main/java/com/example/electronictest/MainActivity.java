@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         //если при чтении из xml файла указано налитиче картинти
-        //ImageView imageView = new ImageView(this);
-        //imageView.setImageDrawable(Drawable.createFromPath("C:\\Users\\Peter\\Desktop\\E8P7e4cVgAE8SvZ.jpg"));
-        //imageView.setImageResource(R.drawable.e);
-        //imageView.setLayoutParams(params);
-        //linearLayout.addView(imageView);
+        int id = getResources().getIdentifier("yourpackagename:drawable/" + setTests.get(0).images, null, null);
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(id);
+        imageView.setLayoutParams(params);
+        linearLayout.addView(imageView);
 
         createRadioButtons();
         //createCheckBoxs();
