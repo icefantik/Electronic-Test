@@ -17,7 +17,7 @@ public class ParseXmlFile
 {
     public ArrayList <TestItems> parsXmlFile(XmlPullParser parser) throws IOException, XmlPullParserException
     {
-        ArrayList<String> questions = new ArrayList<String>();
+        ArrayList<String> answers = new ArrayList<String>();
         TestItems testItemsElems = new TestItems();
         ArrayList <TestItems> listTestItem = new ArrayList<TestItems>();
         while (parser.next() != XmlPullParser.END_DOCUMENT)
@@ -27,15 +27,23 @@ public class ParseXmlFile
             if (parser.getEventType() != XmlPullParser.START_TAG && parser.getEventType() != XmlPullParser.END_TAG) {
                 continue;
             }
-            if (parser.getName().contains("question")) {
+            if (parser.getName().equals("question")) {
                 parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
                 if (parser.next() == XmlPullParser.TEXT) {
-                    questions.add(parser.getText());
+                    testItemsElems.question = parser.getText();
                     parser.nextTag();
                 }
                 parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
             }
-            else if (parser.getName().equals("coundQuestions")) {
+            else if (parser.getName().contains("answer")) {
+                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
+                if (parser.next() == XmlPullParser.TEXT) {
+                    answers.add(parser.getText());
+                    parser.nextTag();
+                }
+                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+            }
+            else if (parser.getName().equals("count")) {
                 parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
                 if (parser.next() == XmlPullParser.TEXT) {
                     testItemsElems.CountQuestions = Integer.parseInt(parser.getText());
@@ -43,7 +51,7 @@ public class ParseXmlFile
                 }
                 parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
             }
-            else if (parser.getName().equals("numAnswer")) {
+            else if (parser.getName().equals("answNumber")) {
                 parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
                 if (parser.next() == XmlPullParser.TEXT) {
                     testItemsElems.NumAnswer = Integer.parseInt(parser.getText());
@@ -60,10 +68,10 @@ public class ParseXmlFile
                 parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
             }
             else if (parser.getEventType() != XmlPullParser.START_TAG && parser.next() != XmlPullParser.END_DOCUMENT) {
-                testItemsElems.questions = questions;
+                testItemsElems.answers = answers;
                 listTestItem.add(testItemsElems);
                 testItemsElems = new TestItems();
-                questions = new ArrayList<String>();
+                answers = new ArrayList<String>();
                 String nameTage2 = parser.getName();
             }
         }
@@ -72,7 +80,8 @@ public class ParseXmlFile
 
     public class TestItems
     {
-        public ArrayList<String> questions;
+        public String question;
+        public ArrayList<String> answers;
         public int NumAnswer;
         public int CountQuestions;
         public int KindAnswer;

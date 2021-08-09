@@ -1,21 +1,21 @@
 <test>
     <TestSet>
-        <question1 type="text">One</question1>
-        <question2 type="text">Two</question2>>
-        <question3 type="text">Three</question3>>
-        <coundQuestions>3</coundQuestions>
-        <!-- <answer>answ</answer>> -->
-        <numAnswer>1</numAnswer> <!-- number question -->
+        <question type="text">Hello</question>
+        <answer1 type="text">One</answer1>
+        <answer2 type="text">Two</answer2>
+        <answer3 type="text">Three</answer3>
+        <count>3</count>
+        <answNumber>1</answNumber> <!-- number question -->
         <kindButton>1</kindButton>
         <image>AAECAwQFBgcICQ.jpg</image>
     </TestSet>
     <TestSet>
-        <question1>retret</question1>
-        <question2>gfhgfh</question2>>
-        <question3>gfhqqqqqqq</question3>>
-        <coundQuestions>1</coundQuestions>
-        <!-- <answer>answ</answer>> -->
-        <numAnswer>2</numAnswer> <!-- number question -->
+        <question type="text">Hello 2</question>>
+        <answer1>retret</answer1>
+        <answer2>gfhgfh</answer2>
+        <answer3>gfhqqqqqqq</answer3>
+        <count>3</count>
+        <answNumber>2</answNumber> <!-- number question -->
         <kindButton>2</kindButton>
     </TestSet>
 </test>
