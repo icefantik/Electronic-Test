@@ -28,52 +28,22 @@ public class ParseXmlFile
                 continue;
             }
             if (parser.getName().equals("question")) {
-                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
-                if (parser.next() == XmlPullParser.TEXT) {
-                    testItemsElems.question = parser.getText();
-                    parser.nextTag();
-                }
-                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+                testItemsElems.question = readText(parser);
             }
             else if (parser.getName().contains("answer")) {
-                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
-                if (parser.next() == XmlPullParser.TEXT) {
-                    answers.add(parser.getText());
-                    parser.nextTag();
-                }
-                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+                answers.add(readText(parser));
             }
             else if (parser.getName().equals("count")) {
-                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
-                if (parser.next() == XmlPullParser.TEXT) {
-                    testItemsElems.CountQuestions = Integer.parseInt(parser.getText());
-                    parser.nextTag();
-                }
-                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+                testItemsElems.CountQuestions = Integer.parseInt(readText(parser));
             }
             else if (parser.getName().equals("answNumber")) {
-                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
-                if (parser.next() == XmlPullParser.TEXT) {
-                    testItemsElems.NumAnswer = Integer.parseInt(parser.getText());
-                    parser.nextTag();
-                }
-                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+                testItemsElems.NumAnswer = Integer.parseInt(readText(parser));
             }
             else if (parser.getName().equals("kindButton")) {
-                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
-                if (parser.next() == XmlPullParser.TEXT) {
-                    testItemsElems.KindAnswer = Integer.parseInt(parser.getText());
-                    parser.nextTag();
-                }
-                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+                testItemsElems.KindAnswer = Integer.parseInt(readText(parser));
             }
             else if (parser.getName().equals("image")) {
-                parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
-                if (parser.next() == XmlPullParser.TEXT) {
-                    testItemsElems.images = parser.getText();
-                    parser.nextTag();
-                }
-                parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+                testItemsElems.images = readText(parser);
             }
             else if (parser.getEventType() != XmlPullParser.START_TAG && parser.next() != XmlPullParser.END_DOCUMENT) {
                 testItemsElems.answers = answers;
@@ -84,6 +54,17 @@ public class ParseXmlFile
             }
         }
         return listTestItem;
+    }
+    private String readText(XmlPullParser parser) throws IOException, XmlPullParserException
+    {
+        String text = null;
+        parser.require(XmlPullParser.START_TAG, parser.getNamespace(), parser.getName());
+        if (parser.next() == XmlPullParser.TEXT) {
+            text = parser.getText();
+            parser.nextTag();
+        }
+        parser.require(XmlPullParser.END_TAG, parser.getNamespace(), parser.getName());
+        return text;
     }
 
     public class TestItems
