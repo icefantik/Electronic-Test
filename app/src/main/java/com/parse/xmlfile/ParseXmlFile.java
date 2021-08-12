@@ -55,6 +55,7 @@ public class ParseXmlFile
         }
         return listTestItem;
     }
+
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException
     {
         String text = null;
@@ -75,5 +76,10 @@ public class ParseXmlFile
         public int CountQuestions;
         public int KindAnswer;
         public String images;
+    }
+
+    public enum KindCreateButton {
+        RADIOBUTTON,
+        CHECKBOX
     }
 }

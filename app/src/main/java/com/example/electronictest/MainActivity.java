@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-
+import com.parse.xmlfile.ParseXmlFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,15 +40,22 @@ public class MainActivity extends AppCompatActivity
             error.printStackTrace();
         }
 
-        //если при чтении из xml файла указано налитиче картинти
-        int id = getResources().getIdentifier("yourpackagename:drawable/" + setTests.get(0).images, null, null);
         ImageView imageView = new ImageView(this);
-        imageView.setImageResource(id);
-        imageView.setLayoutParams(params);
-        linearLayout.addView(imageView);
-
-        createRadioButtons();
-        //createCheckBoxs();
+        //если при чтении из xml файла указано налитиче картинти
+        for (int i = 0; i < setTests.size(); ++i) {
+            if (setTests.get(i).images != null) {
+                int id = getResources().getIdentifier("yourpackagename:drawable/" + setTests.get(i).images, null, null);
+                imageView.setImageResource(id);
+                imageView.setLayoutParams(params);
+                linearLayout.addView(imageView);
+            }
+            if (ParseXmlFile.KindCreateButton.RADIOBUTTON.ordinal() == setTests.get(i).KindAnswer) {
+                createRadioButtons();
+            }
+            else if (ParseXmlFile.KindCreateButton.CHECKBOX.ordinal() == setTests.get(i).KindAnswer) {
+                createCheckBoxs();
+            }
+        }
 
         params.setMargins(0,0,0, 0);
         Button btnToAnswer = new Button(this);
@@ -99,9 +106,5 @@ public class MainActivity extends AppCompatActivity
         linearLayout.addView(checkBox1);
         linearLayout.addView(checkBox2);
         linearLayout.addView(checkBox3);
-    }
-    enum KindCreateButton{
-        RADIO_BUTTON,
-        CHECKBOX
     }
 }
