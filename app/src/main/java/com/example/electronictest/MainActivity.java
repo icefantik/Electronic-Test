@@ -3,6 +3,7 @@ package com.example.electronictest;
 import com.parse.xmlfile.ParseXmlFile;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -20,6 +21,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends AppCompatActivity
 {
+    private static int indexSetTests = 0;
+    private ArrayList<CheckBox> arrayCheckBoxs = new ArrayList<CheckBox>();
+    private ArrayList<RadioButton> arrayRadioButton = new ArrayList<RadioButton>();
     private static ArrayList<ParseXmlFile.TestItems> setTests;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -27,10 +31,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 100, 30, 0);
-        XmlPullParser parser = getResources().getXml(R.xml.test);
+        LinearLayout.LayoutParams paramsImage = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT),
+                paramsTextView = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT),
+                paramsButton = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsButton.setMargins(0,0,0, 0);
+        paramsImage.setMargins(0, 100, 30, 0);
+        paramsTextView.setMargins(5, 0, 0, 50);
 
+        XmlPullParser parser = getResources().getXml(R.xml.test);
         ParseXmlFile parseXmlFile = new ParseXmlFile();
 
         try {
@@ -42,69 +50,71 @@ public class MainActivity extends AppCompatActivity
 
         ImageView imageView = new ImageView(this);
         //если при чтении из xml файла указано налитиче картинти
-        for (int i = 0; i < setTests.size(); ++i) {
-            if (setTests.get(i).images != null) {
-                int id = getResources().getIdentifier("yourpackagename:drawable/" + setTests.get(i).images, null, null);
-                imageView.setImageResource(id);
-                imageView.setLayoutParams(params);
-                linearLayout.addView(imageView);
-            }
-            if (ParseXmlFile.KindCreateButton.RADIOBUTTON.ordinal() == setTests.get(i).KindAnswer) {
-                createRadioButtons();
-            }
-            else if (ParseXmlFile.KindCreateButton.CHECKBOX.ordinal() == setTests.get(i).KindAnswer) {
-                createCheckBoxs();
-            }
-        }
+        TextView textViewQuestion = new TextView(this);
 
-        params.setMargins(0,0,0, 0);
         Button btnToAnswer = new Button(this);
+        btnToAnswer.setLayoutParams(paramsButton);
         btnToAnswer.setText("To answer");
+
+        btnToAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                overridePendingTransition(0, 0);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+            }
+        });
+
+        textViewQuestion.setText(setTests.get(indexSetTests).question);
+        textViewQuestion.setLayoutParams(paramsTextView);
+        linearLayout.addView(textViewQuestion);
+        /**
+         if (setTests.get(i).images != null) {
+         int id = getResources().getIdentifier("yourpackagename:drawable/" + setTests.get(i).images, null, null);
+         imageView.setImageResource(id);
+                imageView.setLayoutParams(paramsImage);
+         linearLayout.addView(imageView);
+         }*/
+        if (ParseXmlFile.KindCreateButton.RADIOBUTTON.ordinal() == setTests.get(indexSetTests).KindAnswer) {
+            createRadioButtons(setTests.get(indexSetTests).answers);
+        }
+        else if (ParseXmlFile.KindCreateButton.CHECKBOX.ordinal() == setTests.get(indexSetTests).KindAnswer) {
+            createCheckBoxs(setTests.get(indexSetTests).answers);
+        }
         linearLayout.addView(btnToAnswer);
     }
-    private void createRadioButtons()
+    private void createRadioButtons(ArrayList<String> answers)
     {
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 30, 100);
 
         RadioGroup radioGroup = new RadioGroup(this);
-
-        RadioButton radioButton1 = new RadioButton(this);
-        radioButton1.setText("Ответ 1.");
-        radioButton1.setLayoutParams(params);
-        RadioButton radioButton2 = new RadioButton(this);
-        radioButton2.setText("Ответ 2.");
-        radioButton2.setLayoutParams(params);
-        RadioButton radioButton3 = new RadioButton(this);
-        radioButton3.setText("Ответ 3.");
-        radioButton3.setLayoutParams(params);
-
-        radioGroup.addView(radioButton1);
-        radioGroup.addView(radioButton2);
-        radioGroup.addView(radioButton3);
-
+        RadioButton radioButton = new RadioButton(this);
+        for (int i = 0; i < answers.size(); ++i) {
+            radioButton.setText(answers.get(i));
+            radioButton.setLayoutParams(params);
+            arrayRadioButton.add(radioButton);
+            radioGroup.addView(radioButton);
+            radioButton = new RadioButton(this);
+        }
         linearLayout.addView(radioGroup);
     }
-    private void createCheckBoxs()
+    private void createCheckBoxs(ArrayList<String> answers)
     {
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        CheckBox checkBox1 = new CheckBox(this);
-        checkBox1.setText("Ответ 1.");
-        CheckBox checkBox2 = new CheckBox(this);
-        checkBox2.setText("Ответ 2.");
-        CheckBox checkBox3 = new CheckBox(this);
-        checkBox3.setText("Ответ 3.");
-
         params.setMargins(0, 0, 30, 100);
-        checkBox1.setLayoutParams(params);
-        checkBox2.setLayoutParams(params);
-        checkBox3.setLayoutParams(params);
-
-        linearLayout.addView(checkBox1);
-        linearLayout.addView(checkBox2);
-        linearLayout.addView(checkBox3);
+        CheckBox checkBox = new CheckBox(this);
+        for (int i = 0; i < answers.size(); ++i) {
+            checkBox.setText(answers.get(i));
+            checkBox.setLayoutParams(params);
+            arrayCheckBoxs.add(checkBox);
+            linearLayout.addView(checkBox);
+            checkBox = new CheckBox(this);
+        }
     }
 }
