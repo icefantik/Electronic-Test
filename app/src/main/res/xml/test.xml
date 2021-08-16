@@ -16,6 +16,6 @@
         <answer3>gfhqqqqqqq</answer3>
         <count>3</count>
         <answNumber>2</answNumber> <!-- number question -->
-        <kindButton>2</kindButton>
+        <kindButton>0</kindButton>
     </TestSet>
 </test>

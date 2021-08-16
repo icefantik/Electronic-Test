@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button btnToAnswer = new Button(this);
+        ImageView imageView = new ImageView(this);
+        TextView textViewQuestion = new TextView(this);
+
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams paramsImage = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT),
                 paramsTextView = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT),
@@ -48,11 +52,7 @@ public class MainActivity extends AppCompatActivity
             error.printStackTrace();
         }
 
-        ImageView imageView = new ImageView(this);
         //если при чтении из xml файла указано налитиче картинти
-        TextView textViewQuestion = new TextView(this);
-
-        Button btnToAnswer = new Button(this);
         btnToAnswer.setLayoutParams(paramsButton);
         btnToAnswer.setText("To answer");
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity
                 overridePendingTransition(0, 0);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
+                ++indexSetTests;
                 overridePendingTransition(0, 0);
                 startActivity(intent);
             }
@@ -78,10 +79,12 @@ public class MainActivity extends AppCompatActivity
                 imageView.setLayoutParams(paramsImage);
          linearLayout.addView(imageView);
          }*/
-        if (ParseXmlFile.KindCreateButton.RADIOBUTTON.ordinal() == setTests.get(indexSetTests).KindAnswer) {
+        if (ParseXmlFile.KindCreateButton.RADIOBUTTON.ordinal() == setTests.get(indexSetTests).KindAnswer)
+        {
             createRadioButtons(setTests.get(indexSetTests).answers);
         }
-        else if (ParseXmlFile.KindCreateButton.CHECKBOX.ordinal() == setTests.get(indexSetTests).KindAnswer) {
+        else if (ParseXmlFile.KindCreateButton.CHECKBOX.ordinal() == setTests.get(indexSetTests).KindAnswer)
+        {
             createCheckBoxs(setTests.get(indexSetTests).answers);
         }
         linearLayout.addView(btnToAnswer);
