@@ -12,11 +12,12 @@
         android:layout_height="match_parent"
         android:gravity="bottom|center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         />
 
-    <!--<TextView
+    <!--android:gravity="bottom|center"
+    <TextView
         android:layout_width="353dp"
         android:layout_height="22dp"
         android:text="Hello World!"
