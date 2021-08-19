@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity
     private static int lengthSetTests = 0;
     private static int countCorrectAnswer = 0;
     private static int countNotCorrectAnswer = 0;
-    private ArrayList<CheckBox> arrayCheckBoxs = new ArrayList<CheckBox>();
-    private ArrayList<RadioButton> arrayRadioButton = new ArrayList<RadioButton>();
+    private ArrayList<CheckBox> arrayCheckBoxs;// = new ArrayList<CheckBox>();
+    private ArrayList<RadioButton> arrayRadioButton;// = new ArrayList<RadioButton>();
     private static ArrayList<ParseXmlFile.TestItems> setTests;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -86,9 +86,6 @@ public class MainActivity extends AppCompatActivity
                         }
                     }
 
-                    //setTests.get(indexSetTests).;
-                    //setTests.get(indexSetTests).NumAnswer
-
                     ++indexSetTests;
                     overridePendingTransition(0, 0);
                     startActivity(intent);
@@ -138,7 +135,7 @@ public class MainActivity extends AppCompatActivity
 
     private void createRadioButtons(ArrayList<String> answers)
     {
-
+        arrayRadioButton = new ArrayList<RadioButton>();
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 30, 100);
@@ -156,7 +153,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void createCheckBoxs(ArrayList<String> answers)
     {
-        //arrayCheckBoxs = new ArrayList<CheckBox>();
+        arrayCheckBoxs = new ArrayList<CheckBox>();
         LinearLayout linearLayout = findViewById(R.id.rootContainer);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 30, 100);

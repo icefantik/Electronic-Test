@@ -1,9 +1,9 @@
 <test>
     <TestSet>
         <question type="text">Hello</question>
-        <answer1 type="text">One</answer1>
-        <answer2 type="text">Two</answer2>
-        <answer3 type="text">Three</answer3>
+        <answer0 type="text">One</answer0>
+        <answer1 type="text">Two</answer1>
+        <answer2 type="text">Three</answer2>
         <count>3</count>
         <answNumber>1</answNumber> <!-- number question -->
         <kindButton>1</kindButton>
@@ -11,11 +11,16 @@
     </TestSet>
     <TestSet>
         <question type="text">Hello 2</question>>
-        <answer1>retret</answer1>
-        <answer2>gfhgfh</answer2>
-        <answer3>gfhqqqqqqq</answer3>
+        <answer0>retret</answer0>
+        <answer1>gfhgfh</answer1>
+        <answer2>gfhqqqqqqq</answer2>
         <count>3</count>
         <answNumber>2</answNumber> <!-- number question -->
         <kindButton>0</kindButton>
     </TestSet>
 </test>
+<!--
+При составлении вопросов
+вопросы насинаются с 0 из-за индекса
+
+-->
