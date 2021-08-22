@@ -7,7 +7,7 @@
         <count>3</count>
         <answNumber>1</answNumber> <!-- number question -->
         <kindButton>1</kindButton>
-        <image>AAECAwQFBgcICQ.jpg</image>
+        <image>konstrukciya2</image>
     </TestSet>
     <TestSet>
         <question type="text">Hello 2</question>>

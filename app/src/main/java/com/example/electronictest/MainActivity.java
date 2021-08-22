@@ -2,7 +2,9 @@ package com.example.electronictest;
 
 import com.parse.xmlfile.ParseXmlFile;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<CheckBox> arrayCheckBoxs;// = new ArrayList<CheckBox>();
     private ArrayList<RadioButton> arrayRadioButton;// = new ArrayList<RadioButton>();
     private static ArrayList<ParseXmlFile.TestItems> setTests;
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -48,7 +52,6 @@ public class MainActivity extends AppCompatActivity
         }
         if (indexSetTests >= 0 && lengthSetTests > indexSetTests) {
             Button btnToAnswer = new Button(this);
-            ImageView imageView = new ImageView(this);
             TextView textViewQuestion = new TextView(this);
 
             LinearLayout linearLayout = findViewById(R.id.rootContainer);
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity
                     paramsTextView = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT),
                     paramsButton = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             paramsButton.setMargins(0, 0, 0, 0);
-            paramsImage.setMargins(0, 100, 30, 0);
+            paramsImage.setMargins(0, 0, 0, 0);
             paramsTextView.setMargins(5, 0, 0, 50);
 
             //если при чтении из xml файла указано налитиче картинти
@@ -95,13 +98,12 @@ public class MainActivity extends AppCompatActivity
             textViewQuestion.setText(setTests.get(indexSetTests).question);
             textViewQuestion.setLayoutParams(paramsTextView);
             linearLayout.addView(textViewQuestion);
-            /**
-             if (setTests.get(i).images != null) {
-             int id = getResources().getIdentifier("yourpackagename:drawable/" + setTests.get(i).images, null, null);
-             imageView.setImageResource(id);
-             imageView.setLayoutParams(paramsImage);
-             linearLayout.addView(imageView);
-             }*/
+
+            if (setTests.get(indexSetTests).images != null) {
+                ImageView imageView = findViewById(R.id.simpleImageView);
+                int idImages = this.getApplicationContext().getResources().getIdentifier(setTests.get(indexSetTests).images, "drawable", getPackageName());
+                imageView.setImageResource(idImages);
+            }
             if (ParseXmlFile.KindCreateButton.RADIOBUTTON.ordinal() == setTests.get(indexSetTests).KindAnswer) {
                 createRadioButtons(setTests.get(indexSetTests).answers);
             } else if (ParseXmlFile.KindCreateButton.CHECKBOX.ordinal() == setTests.get(indexSetTests).KindAnswer) {
